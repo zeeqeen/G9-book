@@ -1,0 +1,46 @@
+name: Deploy mdBook to GitHub Pages # 工作流的名称，会在 GitHub Actions 页面显示
+
+on:
+  push: # 定义触发此工作流的事件
+    branches:
+      - main # 当有代码推送到 'main' 分支时，此工作流将被触发。
+              # 如果你的主分支名称是 'master' 或其他，请相应修改。
+
+jobs: # 定义一个或多个作业 (jobs)。这里我们只有一个作业。
+  build-and-deploy: # 作业的唯一标识符
+    runs-on: ubuntu-latest # 指定运行此作业的虚拟机环境。
+                            # ubuntu-latest 是 GitHub Actions 提供的最新版 Ubuntu 虚拟机。
+
+    steps: # 定义此作业中要执行的一系列步骤
+    - name: Checkout code # 步骤名称：检出代码
+      uses: actions/checkout@v4 # 使用 actions/checkout 官方 Action 来检出你的 Git 仓库代码到虚拟机中。
+                                # @v4 是指定使用该 Action 的版本。
+
+    - name: Setup Rust # 步骤名称：设置 Rust 环境
+      uses: actions-rs/toolchain@v1 # 使用 actions-rs/toolchain 官方 Action 来安装 Rust 工具链。
+      with:
+        toolchain: stable # 指定安装 Rust 的稳定版本。
+
+    - name: Install mdbook # 步骤名称：安装 mdBook
+      run: cargo install mdbook # 执行 shell 命令来安装 mdBook。
+                                # 如果你不需要默认特性，可以尝试 'cargo install mdbook --no-default-features' 可能会更快。
+
+    - name: Build mdBook # 步骤名称：构建 mdBook
+      run: mdbook build # 执行 shell 命令来构建 mdBook。
+                          # 这会在你的项目根目录中生成一个名为 'book' 的文件夹，
+                          # 里面包含了所有静态的 HTML、CSS、JS 文件。
+
+    - name: Deploy to GitHub Pages # 步骤名称：部署到 GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4 # 使用第三方 Action 'peaceiris/actions-gh-pages' 来处理部署到 GitHub Pages 的逻辑。
+                                          # 这是一个非常流行且功能强大的 Action。
+      with: # 配置 'peaceiris/actions-gh-pages' Action 的参数
+        github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub 提供的秘密令牌。
+                                                  # ${{ secrets.GITHUB_TOKEN }} 是一个特殊的上下文变量，
+                                                  # GitHub Actions 会自动为你的仓库提供一个临时且安全的 token，
+                                                  # 用于在工作流中执行操作，例如推送代码。你不需要手动创建或配置它。
+        publish_dir: ./book # 指定要部署的静态文件所在的目录。
+                             # mdBook 默认将构建结果输出到项目根目录下的 'book' 文件夹。
+        publish_branch: gh-pages # 指定将静态文件推送到哪个分支。
+                                  # GitHub Pages 通常从 'gh-pages' 分支或 'main'/'master' 分支的 'docs/' 目录读取。
+                                  # 推荐使用 'gh-pages' 分支，因为它将源文件和构建产物分开。
+                                  # 如果 'gh-pages' 分支不存在，这个 Action 会自动创建它。
