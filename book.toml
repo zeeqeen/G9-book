@@ -4,3 +4,6 @@ authors = ["zeeqeen"]
 description = "A project process standards for G9 Game General"
 src = "src"
 language = "zh"
+
+[output.html]
+git-repository-url = "https://github.com/zeeqeen/G9-book"
