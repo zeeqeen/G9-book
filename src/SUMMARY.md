@@ -2,10 +2,10 @@
 # Summary
 [G9 项目流程标准](STANDARD.md)
 # Idea
-- [打砖块](idea/ch1.md)
+- [1.打砖块](idea/ch1.md)
 - [2](idea/ch2.md)
 - [3](idea/ch3.md)
-- [4](idea/ch4.md)
+- [4.雷霆战机](idea/ch4.md)
 - [5](idea/ch5.md)
 - [6](idea/ch6.md)
 - [7](idea/ch7.md)
