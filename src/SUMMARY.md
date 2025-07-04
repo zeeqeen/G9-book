@@ -2,6 +2,7 @@
 # Summary
 [G9 项目流程标准](STANDARD.md)
 # Idea
+- [设计原则](design.md)
 - [Idea lists](idea/idea.md)
     - [打砖块](idea/ch1.md)
     - [汽车泡泡](idea/ch2.md)
