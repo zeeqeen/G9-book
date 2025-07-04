@@ -14,7 +14,15 @@
     - [抓大鹅](idea/ch9.md)
     - [洗地板模拟器](idea/ch10.md)
     - [像素游戏冒险岛再发明](idea/ch11.md)
-    - [12](idea/ch12.md)
+    - [吃掉落物](idea/ch12.md)
+    - [塔防大富翁杂交版](idea/ch13.md)
+    - [神枪手](idea/ch14.md)
+    - [Flip Wall](idea/ch15.md)
+    - [神枪手](idea/ch16.md)
+    - [17](idea/ch17.md)
+    - [18](idea/ch18.md)
+    - [19](idea/ch19.md)
+    - [20](idea/ch20.md)
 # 开发
 
 - [游戏引擎](dev/engine.md)
