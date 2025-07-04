@@ -1,0 +1,378 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>G9-Game-General</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A project process standards for G9 Game General">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">G9-Game-General</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/zeeqeen/G9-book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="g9-项目流程标准"><a class="header" href="#g9-项目流程标准">G9 项目流程标准</a></h1>
+<h2 id="开发流程标准"><a class="header" href="#开发流程标准">开发流程标准</a></h2>
+<h2 id="素材标准"><a class="header" href="#素材标准">素材标准</a></h2>
+<h2 id="数据分析标准"><a class="header" href="#数据分析标准">数据分析标准</a></h2>
+<h2 id="发行和商业化标准"><a class="header" href="#发行和商业化标准">发行和商业化标准</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="关于ltv与cpi不等式之构成要素的系统性解构"><a class="header" href="#关于ltv与cpi不等式之构成要素的系统性解构">关于LTV与CPI不等式之构成要素的系统性解构</a></h1>
+<h2 id="核心思想"><a class="header" href="#核心思想">核心思想</a></h2>
+<p>本企业运营所遵循的基础经济原则，可由不等式 LTV &gt; CPI 精确描述。其核心要义在于：任何指定用户在其生命周期内所能产生的总价值（Lifetime Value, LTV），必须超越获取该用户所需付出的成本（Cost Per Install, CPI）。企业的全部运营活动，均旨在实现左侧变量（LTV）的最大化，同时致力于右侧变量（CPI）的最小化。此不等式不仅是一个数学公式，它更构成了本公司“创意验证机”商业模型得以存续的物理定律，并作为所有战略、产品及运营决策的最终审判依据。</p>
+<h1 id="第一部分用户生命周期价值ltv的构成要素分析价值捕获效能评估"><a class="header" href="#第一部分用户生命周期价值ltv的构成要素分析价值捕获效能评估">第一部分：用户生命周期价值（LTV）的构成要素分析——价值捕获效能评估</a></h1>
+<p>LTV 作为一个复合指标，量化了从单一用户处所能获取的经济价值总和。它综合体现了产品的内在吸引力与商业化效率。在以广告变现为核心的商业模型中，其核心构成要素可被系统性地拆解如下：</p>
+<h2 id="ltv之一级公式"><a class="header" href="#ltv之一级公式">LTV之一级公式</a></h2>
+<p><img src="../src/assets_book/equation.typ/ltv.svg" alt="LTV" /></p>
+<ul>
+<li>ARPDAU (每日活跃用户平均收入): 此参数用于量化每一名活跃用户在单个自然日内所能贡献的平均收入。因此，ARPDAU是衡量企业单日变现效率的核心指标。其可类比为零售业态中，每位进店顾客的日均客单价。</li>
+<li>Lifetime (平均生命周期): 此参数代表一个标准用户从安装应用至最终流失，其间保持活跃状态的平均天数。因此，Lifetime 是衡量产品长期用户维系能力的核心指标。其可类比为零售业态中的顾客忠诚度，即单一顾客的平均复购次数。</li>
+</ul>
+<p>一个成功的商业实体，不仅要求其顾客在单次消费中贡献足够的价值，更要求其具备吸引顾客反复光顾的能力。LTV 正是通过将此二维度——单次价值与光顾频率——进行乘积运算，从而得出对用户终身价值的全面评估。</p>
+<p>现在，我们对这两个一级参数进行二次解剖：</p>
+<h2 id="arpdau之二级拆解变现引擎的构成"><a class="header" href="#arpdau之二级拆解变现引擎的构成">ARPDAU之二级拆解（变现引擎的构成）</a></h2>
+<p><img src="../src/assets_book/equation.typ/arpdau.svg" alt="" /></p>
+<h3 id="ad-impressions-per-dau-人均每日广告展示次数"><a class="header" href="#ad-impressions-per-dau-人均每日广告展示次数">Ad Impressions per DAU (人均每日广告展示次数)</a></h3>
+<ul>
+<li>定义： 此指标计量了一个日均活跃用户在 24 小时内所接收到的广告展示（包括但不限于激励视频与插屏广告）的平均频次。它是我们变现模型的 <strong>“频率”</strong> 变量。</li>
+<li>优化权责： 产品管理（PM）与工程开发团队。</li>
+<li>优化方法论： 此为产品设计与应用心理学的交叉领域。其优化手段包括但不限于：调整核心游戏循环（即“街机厅 Clip”）的节奏，例如，通过将单局会话时长从 60 秒缩短至 45 秒，以期在同等总用户时长内创造更多的广告展示节点；设计更具吸引力的“感官鸡尾酒”及“留存黑科技”机制，例如，在用户选择“观看广告以复活”时，提供一个在视觉与听觉上极具冲击力的“起死回生”特效，以提升激励视频广告的点击转化率。系统的 A/B 测试将被用于验证何种节奏与奖励组合，能最大化用户的广告接受度。</li>
+</ul>
+<h3 id="ecpm-每千次广告展示的有效收入"><a class="header" href="#ecpm-每千次广告展示的有效收入">eCPM (每千次广告展示的有效收入)</a></h3>
+<ul>
+<li>定义： 此指标计量了我们的广告位资产，每完成一千次有效展示所能产生的美元收入。它是我们变现模型的 <strong>“单价”</strong> 变量。</li>
+<li>优化权責： 用户获取（UA）负责人及外部市场环境。</li>
+<li>优化方法论： eCPM 的数值主要由两大变量决定：用户质量与广告聚合平台的算法效率。一个来自高价值地区（如瑞士）的 iOS 用户，其 eCPM 可达 50；而一个来自低价值地区（如越南）的低端安卓用户，其 eCPM 可能仅为 2。我们虽无法改变用户的内在价值，但可通过数据分析，识别出eCPM表现最优的广告网络与地理区域，从而指导用户获取团队进行精准投放。同时，选用顶级的广告聚合平台（如AppLovin MAX），可确保通过实时竞价机制，使我们的每一个广告位都以当时市场的最高价被“拍卖”出去。</li>
+</ul>
+<h2 id="lifetime之二级拆解留存引擎的构成"><a class="header" href="#lifetime之二级拆解留存引擎的构成">Lifetime之二级拆解（留存引擎的构成）</a></h2>
+<p>Lifetime作为一个结果性指标，无法被直接优化，其数值是由用户的留存曲线所决定的。留存率，是我们产品核心吸引力的最终、最客观的体现。</p>
+<h3 id="核心参数"><a class="header" href="#核心参数">核心参数</a></h3>
+<ul>
+<li>D1, D3, D7, D30 Retention (次日、3日、7日、30日留存率):</li>
+<li>定义： 此为衡量用户粘性的核心指标序列，其精确数值通过 <strong>同期群分析 (Cohort Analysis)</strong> 获得。其中，D1 留存率严酷地考验了我们的“零教学开局”与“感官鸡尾酒”原则的有效性；而 D7 及更长期的留存率，则验证了“可遥望性”等中期留存钩子的设计成效。</li>
+<li>优化权责： 产品管理（PM）与工程开发团队。</li>
+<li>优化方法论： 通过系统的 A/B 测试，对不同的核心玩法、“爽感”设计方案、以及“隐形钩子”机制进行验证，以科学方法寻找能带来最优留存曲线的产品设计组合。</li>
+</ul>
+<h3 id="lifetime之计算"><a class="header" href="#lifetime之计算">Lifetime之计算：</a></h3>
+<ul>
+<li>数据分析负责人在此扮演着“首席精算师”的角色。其职责是运用已知的 D1, D33, D7等历史留存数据，通过数学回归模型（通常为幂函数或指数函数）来拟合一条完整的、可预测未来的留存曲线。该曲线下方的积分面积，即为该用户同期群的平均生命周期天数（Lifetime）的近似值。此预测模型的精准度，直接决定了我们对LTV估算的置信水平，并最终决定了我们在 CPI 竞价策略中所能承受的风险上限。</li>
+</ul>
+<h1 id="第二部分cpi-每安装成本-的拆解--我们的流量获取效率"><a class="header" href="#第二部分cpi-每安装成本-的拆解--我们的流量获取效率">第二部分：CPI (每安装成本) 的拆解 —— “我们的流量获取效率”</a></h1>
+<p>CPI 代表了我们获取一个新用户的平均边际成本。它是我们商业模式中的“成本端”，是必须被严格监控和控制的“支出项”。</p>
+<h2 id="cpi之一级公式"><a class="header" href="#cpi之一级公式">CPI之一级公式</a></h2>
+<p><img src="../src/assets_book/equation.typ/cpi_1.svg" alt="" /></p>
+<ul>
+<li>Total Ad Spend (总广告花费): 在特定广告活动中投入的资金总额。</li>
+<li>Total Installs (总安装数): 由该广告活动直接带来的新用户安装总量。</li>
+</ul>
+<p>现在，我们对这个一级公式进行二次解剖，以探究影响其数值的底层参数。</p>
+<h2 id="cpi之二级拆解营销漏斗的构成"><a class="header" href="#cpi之二级拆解营销漏斗的构成">CPI之二级拆解（营销漏斗的构成）</a></h2>
+<p><img src="../src/assets_book/equation.typ/cpi_2.svg" alt="" /></p>
+<h3 id="cpm-cost-per-mille--每千次展示成本"><a class="header" href="#cpm-cost-per-mille--每千次展示成本">CPM (Cost Per Mille / 每千次展示成本):</a></h3>
+<ul>
+<li>定义： 我们的广告，在指定平台（如 Facebook 或 TikTok）上，向目标用户群进行一千次有效展示所需支付的成本。</li>
+<li>决定因素： 市场竞争。T1 市场的 CPM 远高于 T3 市场。此为我们难以改变，但必须适应的 <strong>“市场价格”</strong>。其可类比为在不同地理位置开设实体店所需支付的“租金”，纽约曼哈顿的租金天然高于越南河内。</li>
+</ul>
+<h3 id="ipm-installs-per-mille--每千次展示安装数"><a class="header" href="#ipm-installs-per-mille--每千次展示安装数">IPM (Installs per Mille / 每千次展示安装数):</a></h3>
+<ul>
+<li>定义： 我们的广告，每被有效展示一千次，所能带来的新安装数量。此为衡量我们广告素材综合竞争力的“黄金指标”。IPM越高，意味着我们的广告越“吸量”，CPI 也因此越低。</li>
+<li>优化权责： AIGC 创意团队与用户获取（UA）负责人。</li>
+<li>优化方法论： 此为我们的“创意战场”。通过制作更具视觉冲击力、更懂用户心理的视频广告素材，来最大化广告的点击率 (CTR) 和转化率 (CVR)。例如，通过 A/B 测试验证“失败引导”与“爽感展示”两种创意模式的IPM表现。一个成功的创意，可能使 IPM 翻倍，从而使 CPI 直接减半，极大地拓宽了利润空间。</li>
+</ul>
+<h1 id="终极公式我们公司的价值创造总图"><a class="header" href="#终极公式我们公司的价值创造总图">终极公式：我们公司的“价值创造总图”</a></h1>
+<p>现在，我们将所有拆解后的参数，重新代入最初的不等式中。这就形成了你们公司的“价值创造总图”，它以数学语言，清晰地标明了每个团队的作战岗位：</p>
+<p><img src="../src/assets_book/equation.typ/formula.svg" alt="" /></p>
+<p>基于此公式，团队的职责分工被赋予了前所未有的清晰度：</p>
+<ul>
+<li>你与开发团队： 身份是 <strong>“LTV工程师”</strong>。你们的使命，是通过打磨产品，疯狂优化不等式左侧的 Ad_Imp/DAU 和 Lifetime 这两个变量，让用户看得更多、留得更久。</li>
+<li>你的 AIGC 创意团队： 身份是 <strong>“CPI 压缩机”</strong>。你们的使命，是通过绝妙的创意，疯狂优化不等式右侧的 IPM 这个变量，用更少的钱，带来更多的用户。</li>
+<li>你的数分与投流团队： 身份是 <strong>“战略情报官”。他们的使命，是精确地测量</strong>所有这些参数，并对 eCPM 和 CPM 等市场变量进行商业运营上的优化，最终告诉大家应该在哪个战场、用哪种武器、以什么价格去战斗。</li>
+</ul>
+<p>兄弟，掌握了这个公式的每一个参数，理解它们之间的相互作用，并知道在何时、何地、去拉动哪个“杠杆”，就是你和你团队在第一阶段，需要完成的全部、也是最核心的工作。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="idea-lists"><a class="header" href="#idea-lists">Idea lists</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="打砖块类型参考一"><a class="header" href="#打砖块类型参考一">打砖块类型参考一</a></h1>
+<p><img src="idea/../assets_book/table-id-1.svg" alt="table" />
+<img src="idea/../assets_book/table-id-1.svg" alt="table-id-1" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="汽车跑路"><a class="header" href="#汽车跑路">汽车跑路</a></h1>
+<p><img src="idea/../assets_book/table-id-2.svg" alt="table-id-3" />
+<img src="idea/../assets_book/table-id-2.svg" alt="table-id-2" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="锯木块切橡皮"><a class="header" href="#锯木块切橡皮">锯木块/切橡皮</a></h1>
+<p><img src="idea/../assets_book/table-id-3.svg" alt="table-id-3" /></p>
+<p><img src="idea/../assets_book/table-id-3.svg" alt="table-id-3" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="雷霆战机类型参考"><a class="header" href="#雷霆战机类型参考">雷霆战机类型参考</a></h1>
+<p><img src="idea/../assets_book/table-id-4.svg" alt="table" />
+<img src="idea/../assets_book/table-id-4.svg" alt="table-id-4" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="黑洞攻击"><a class="header" href="#黑洞攻击">黑洞攻击</a></h1>
+<p><img src="idea/../assets_book/table-id-5.svg" alt="table-id-5" /></p>
+<p><img src="idea/../assets_book/table-id-5.svg" alt="table-id-5" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="跳一跳类型参考"><a class="header" href="#跳一跳类型参考">跳一跳类型参考</a></h1>
+<p><img src="idea/../assets_book/table-id-6.svg" alt="table-id-6" /></p>
+<p><img src="idea/../assets_book/table-id-6.svg" alt="table-id-6" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="欢乐球球参考"><a class="header" href="#欢乐球球参考">欢乐球球参考</a></h1>
+<p><img src="idea/../assets_book/table-id-7.svg" alt="table-id-7" /></p>
+<p><img src="idea/../assets_book/table-id-7.svg" alt="table-id-7" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="祖玛塔防"><a class="header" href="#祖玛塔防">祖玛塔防</a></h1>
+<p><img src="idea/../assets_book/table-id-8.svg" alt="table-id-8" />
+<a href="https://blog.csdn.net/beilizhang/article/details/120910518">https://blog.csdn.net/beilizhang/article/details/120910518</a></p>
+<p><a href="https://www.aigei.com/item/carrotfantasy.html">https://www.aigei.com/item/carrotfantasy.html</a></p>
+<p><a href="https://gitcode.com/Premium-Resources/c69d1/?utm_source=article_gitcode_universal&amp;index=top&amp;type=card">https://gitcode.com/Premium-Resources/c69d1/?utm_source=article_gitcode_universal&amp;index=top&amp;type=card</a>
+<img src="idea/../assets_book/table-id-8.svg" alt="table-id-8" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="抓大鹅"><a class="header" href="#抓大鹅">抓大鹅</a></h1>
+<p><img src="idea/../assets_book/table-id-9.svg" alt="table-id-9" /></p>
+<p><img src="idea/../assets_book/table-id-9.svg" alt="table-id-9" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="洗地板模拟器"><a class="header" href="#洗地板模拟器">洗地板模拟器</a></h1>
+<p><img src="idea/../assets_book/table-id-10.svg" alt="table-id-10" /></p>
+<p><img src="idea/../assets_book/table-id-10.svg" alt="table-id-10" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="像素游戏冒险岛再发明"><a class="header" href="#像素游戏冒险岛再发明">像素游戏冒险岛再发明</a></h1>
+<p><img src="idea/../assets_book/table-id-11.svg" alt="table-id-11" /></p>
+<p><img src="idea/../assets_book/table-id-11.svg" alt="table-id-11" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="吃掉落物"><a class="header" href="#吃掉落物">吃掉落物</a></h1>
+<p><img src="idea/../assets_book/table-id-12.svg" alt="table-id-12" /></p>
+<p><img src="idea/../assets_book/table-id-12.svg" alt="table-id-12" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="塔防大富翁杂交版"><a class="header" href="#塔防大富翁杂交版">塔防大富翁杂交版</a></h1>
+<p><img src="idea/../assets_book/table-id-13.svg" alt="table-id-13" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p><img src="idea/../assets_book/table-id-14.svg" alt="table-id-14" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flip-wa"><a class="header" href="#flip-wa">Flip Wa;;</a></h1>
+<p><img src="idea/../assets_book/table-id-15.svg" alt="table-id-15" /></p>
+<p><img src="idea/../assets_book/table-id-15.svg" alt="table-id-15" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="神枪手"><a class="header" href="#神枪手">神枪手</a></h1>
+<p><img src="idea/../assets_book/table-id-16.svg" alt="table-id-16" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p><img src="idea/../assets_book/table-id-17.svg" alt="table-id-17" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p><img src="idea/../assets_book/table-id-18.svg" alt="table-id-18" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p><img src="idea/../assets_book/table-id-19.svg" alt="table-id-19" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p><img src="idea/../assets_book/table-id-20.svg" alt="table-id-20" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="游戏引擎"><a class="header" href="#游戏引擎">游戏引擎</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="bevy"><a class="header" href="#bevy">Bevy</a></h1>
+<p>我们需要在 <code>cargo.toml</code> 里显式指定 <code>NativeActivity</code> 特性而非默认的 <code>GameActivity</code> 以支持老旧的 <code>armebi-v7a</code> 架构安卓设备。见 <a href="https://stackoverflow.com/questions/56824557/what-is-the-difference-between-armeabi-v7a-arm64-v8a-x86">armebi-v7a, arm64-v8a, x86 的区别</a></p>
+<p>执行 <code>cargo ndk</code> 和 <code>gradlew build</code> 命令</p>
+<h2 id="设计"><a class="header" href="#设计">设计</a></h2>
+<ul>
+<li>定义游戏状态，比如 <code>MainMenu</code>, <code>InGame</code>, <code>Paused</code>；用这个状态控制哪些系统在什么时候运行。</li>
+<li>玩家控制，需要读取玩家输入，据此更新玩家的某些属性</li>
+<li>物理世界碰撞，给需要交互的 <code>entity</code> 如玩家、敌人、墙壁、道具等添加 <code>component</code>；监听碰撞事件；设置物理世界。</li>
+<li>游戏逻辑与规则，这是核心玩法，通过编写各种 <code>system</code> 实现，包括记分系统、生命/伤害系统、胜利/失败条件。</li>
+<li>用户界面（UI），包括主菜单（创建按钮和标题），HUD（在 <code>InGame</code> 状态下显示玩家的属性，比如生命值、弹药、分数等信息），暂停/结束菜单。</li>
+<li>关卡/世界的构建，从文件加载或者程序化生成</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cocos"><a class="header" href="#cocos">Cocos</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="godot"><a class="header" href="#godot">Godot</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="unity"><a class="header" href="#unity">Unity</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="安卓"><a class="header" href="#安卓">安卓</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="广告集成"><a class="header" href="#广告集成">广告集成</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="谷歌-api"><a class="header" href="#谷歌-api">谷歌 API</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="参考"><a class="header" href="#参考">参考</a></h1>
+<ul>
+<li><input disabled="" type="checkbox"/>
+短期目标是 MVP (Minimum Viable Product)
+<ul>
+<li>功能极简</li>
+<li>快速开发</li>
+<li>低成本</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"/>
+长期目标是 MMO (Massively Multiplayer Online Game)</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
