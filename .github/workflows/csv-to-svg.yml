@@ -28,7 +28,7 @@ jobs:
       - name: Find new CSV files
         id: find_new_csv
         run: |
-          git diff --name-only --diff-filter=A HEAD^ HEAD > new_files.txt
+          git diff --name-only --diff-filter=A ${{ github.event.before }} ${{ github.event.after }} > new_files.txt
           grep 'src/assets_book/table-id-.*\.csv' new_files.txt | sed 's/src\/assets_book\///' > csv_files.txt || true
           cat csv_files.txt
 
