@@ -1,4 +1,3 @@
-
 name: CSV to SVG
 
 on:
@@ -24,6 +23,23 @@ jobs:
         uses: typst-community/setup-typst@v4
         with:
           version: v0.6.0
+
+      - name: Install Roboto Serif Font
+        run: |
+          wget https://github.com/googlefonts/roboto-serif/releases/download/v1.008/RobotoSerifFonts-v1.008.zip
+          unzip RobotoSerifFonts-v1.008.zip -d roboto-serif-fonts
+          sudo mkdir -p /usr/local/share/fonts/roboto-serif
+          sudo cp roboto-serif-fonts/fonts/ttf/* /usr/local/share/fonts/roboto-serif/
+
+      - name: Install Noto Serif SC Font
+        run: |
+          wget https://github.com/notofonts/noto-cjk/releases/download/Serif2.003/09_NotoSerifCJKsc.zip
+          unzip 09_NotoSerifCJKsc.zip -d noto-serif-sc-fonts
+          sudo mkdir -p /usr/local/share/fonts/noto-serif-sc
+          sudo cp noto-serif-sc-fonts/OTF/SimplifiedChinese/* /usr/local/share/fonts/noto-serif-sc/
+
+      - name: Update Font Cache
+        run: sudo fc-cache -f -v
 
       - name: Find new CSV files
         id: find_new_csv
