@@ -1,6 +1,6 @@
 #let idea(body) = {
   set page(height: auto, fill: none)
-  set text(fill: white, font: ("Roboto Serif", "Noto Serif SC"))
+  set text(fill: white, font: ("Roboto Serif", "Noto Serif SC"), size: 15pt)
   show table.cell.where(x: 0): set text(weight: "bold", font: "Noto Sans SC")
   body
 }
