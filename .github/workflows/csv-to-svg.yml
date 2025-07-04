@@ -42,6 +42,11 @@ jobs:
       - name: Update Font Cache
         run: sudo fc-cache -f -v
 
+      - name: Clean up font zip files
+        run: |
+          rm RobotoSerifFonts-v1.008.zip
+          rm 09_NotoSerifCJKsc.zip
+
       - name: Find new CSV files
         id: find_new_csv
         run: |
