@@ -20,10 +20,10 @@
     - [神枪手](idea/ch14.md)
     - [Flip Wall](idea/ch15.md)
     - [神枪手](idea/ch16.md)
-    - [17](idea/ch17.md)
-    - [18](idea/ch18.md)
-    - [19](idea/ch19.md)
-    - [20](idea/ch20.md)
+    - [竖屏圣诞老人滑雪冒险](idea/ch17.md)
+    - [沙虫](idea/ch18.md)
+    - [巴别塔](idea/ch19.md)
+    - [战列线](idea/ch20.md)
 # 开发
 
 - [游戏引擎](dev/engine.md)
