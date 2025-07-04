@@ -1,3 +1,4 @@
+
 name: CSV to SVG
 
 on:
@@ -78,3 +79,12 @@ jobs:
           git add src/assets_book/*.typ src/assets_book/*.svg src/idea/*.md
           git diff --quiet && git diff --staged --quiet || git commit -m "Automated: Generate SVG from CSV and update markdown"
           git push
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+          publish_branch: gh-pages
+          force_orphan: true
