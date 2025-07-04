@@ -1,0 +1,62 @@
+
+name: CSV to SVG
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/assets_book/*.csv'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Setup Typst
+        uses: typst/setup-action@v1
+        with:
+          version: v0.6.0
+
+      - name: Find new CSV files
+        id: find_new_csv
+        run: |
+          git diff --name-only --diff-filter=A HEAD^ HEAD > new_files.txt
+          grep 'src/assets_book/table-id-.*\.csv' new_files.txt | sed 's/src\/assets_book\///' > csv_files.txt || true
+          cat csv_files.txt
+
+      - name: Process new CSV files
+        run: |
+          while IFS= read -r csv_file; do
+            if [ -z "$csv_file" ]; then
+              continue
+            fi
+            base_name=$(basename "$csv_file" .csv)
+            number=$(echo "$base_name" | sed 's/table-id-//')
+            typ_file="src/assets_book/${base_name}.typ"
+            svg_file="src/assets_book/${base_name}.svg"
+            md_file="src/idea/ch${number}.md"
+
+            # Create .typ file from template
+            sed "s/table-id-1/${base_name}/g" src/assets_book/table-id-1.typ > "$typ_file"
+
+            # Compile .typ to .svg
+            typst compile "$typ_file" "$svg_file"
+
+            # Append SVG to markdown file
+            echo "" >> "$md_file"
+            echo "![${base_name}](../assets_book/${base_name}.svg)" >> "$md_file"
+          done < csv_files.txt
+
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add src/assets_book/*.typ src/assets_book/*.svg src/idea/*.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "Automated: Generate SVG from CSV and update markdown"
+          git push
